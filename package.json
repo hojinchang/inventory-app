@@ -2,10 +2,10 @@
   "name": "inventory-app",
   "version": "0.0.0",
   "private": true,
-  "scripts":{
-    "start":"node ./bin/www",
-    "devstart":"nodemon ./bin/www",
-    "serverstart":"SET DEBUG=express-locallibrary-tutorial:* & npm run devstart"
+  "scripts": {
+    "start": "node ./bin/www",
+    "devstart": "nodemon ./bin/www",
+    "serverstart": "SET DEBUG=express-locallibrary-tutorial:* & npm run devstart"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -13,6 +13,7 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "mongoose": "^8.1.3",
     "morgan": "~1.9.1"
   }
 }
