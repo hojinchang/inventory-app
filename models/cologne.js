@@ -6,6 +6,7 @@ const CologneSchema = new Schema({
     name: { type: String, required: true },
     brand: { type: Schema.Types.ObjectId, ref: "Brand", required: true },
     scentNotes: [{ type: Schema.Types.ObjectId, ref: "Scent", required: true }],
+    price: { type: Number, required: true, min: 0 },
     description: { type: String, required: true }
 });
 
