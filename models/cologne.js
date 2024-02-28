@@ -9,4 +9,8 @@ const CologneSchema = new Schema({
     description: { type: String, required: true }
 });
 
+CologneSchema.virtual("url").get(function() {
+    return `/catalog/cologne/${this._id}`;
+});
+
 module.exports = mongoose.model("Cologne", CologneSchema);
