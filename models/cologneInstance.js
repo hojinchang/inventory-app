@@ -17,3 +17,9 @@ const CologneInstanceSchema = new Schema({
         ]
     }
 });
+
+CologneInstanceSchema.virtual("url").get(function() {
+    return `/catalog/cologneinstance/${this._id}`;
+})
+
+module.exports = mongoose.model("CologneInstance", CologneInstanceSchema);
