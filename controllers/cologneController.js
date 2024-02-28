@@ -2,6 +2,10 @@ const Cologne = require("../models/cologne");
 
 const asyncHandler = require("express-async-handler");
 
+exports.index = asyncHandler(async(req, res, next) => {
+    res.send("NOT IMPLEMENTED: Site Home Page");
+});
+
 // Diplay list of all Colognes
 exports.cologne_list = asyncHandler(async(req, res, next) => {
     res.send("NOT IMPLEMENTED: Cologne list");
