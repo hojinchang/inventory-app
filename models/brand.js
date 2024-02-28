@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 
 const BrandSchema = new Schema({
     name: { type: String, required: true, maxLength: 100 },
-    country_of_origin: { type: String, required: true, maxLength: 50 },
-    year_established: { type: Date }
+    countryOfOrigin: { type: String, required: true, maxLength: 50 },
+    yearEstablished: { type: Date }
 });
 
 // Set the brand's page url
@@ -15,8 +15,8 @@ BrandSchema.virtual("url").get(function() {
 });
 
 BrandSchema.virtual("year_established_formatted").get(function() {
-    return this.year_established
-        ? DateTime.fromJSDate(this.year_established).toLocaleString(DateTime.DATE_MED)
+    return this.yearEstablished
+        ? DateTime.fromJSDate(this.yearEstablished).toLocaleString(DateTime.DATE_MED)
         : "";
 });
 

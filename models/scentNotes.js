@@ -22,9 +22,15 @@ const ScentNotesSchema = new Schema({
             'Musk',
             'Amber',
             'Vanilla',
-            'Leathery',
+            'Leather',
             'Chypre',
             'Gourmand',
+            'Iris',
+            'Tobacco',
+            'Cocoa',
+            'Cardamom',
+            'Bergamot',
+            'Tonka Bean'
         ]
     }
 });
