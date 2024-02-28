@@ -7,7 +7,6 @@ const ScentNote = require("./models/scentNotes");
 
 const brands = [];
 const colognes = [];
-// const cologneinstances = [];
 const scentNotes = [];
 
 const mongoose = require("mongoose");
