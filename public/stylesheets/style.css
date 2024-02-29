@@ -1,8 +1,38 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "Mulish", sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0;
 }
 
 a {
   color: #00B7FF;
+}
+
+header {
+  padding: 2rem;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  background-color: lightgray;
+}
+
+.body-content-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.sidebar-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.sidebar-nav-list a {
+  text-decoration: none;
 }

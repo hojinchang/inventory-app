@@ -1,9 +1,25 @@
 const Cologne = require("../models/cologne");
+const Brand = require("../models/brand");
+const ScentNote = require("../models/scentNotes");
+const CologneInstance = require("../models/cologneInstance");
 
 const asyncHandler = require("express-async-handler");
 
 exports.index = asyncHandler(async(req, res, next) => {
-    res.send("NOT IMPLEMENTED: Site Home Page");
+    const [nColognes, nCologneInstances, nBrands, nScentNotes] = await Promise.all([
+        Cologne.countDocuments({}).exec(),
+        CologneInstance.countDocuments({}).exec(),
+        Brand.countDocuments({}).exec(),
+        ScentNote.countDocuments({}).exec(),
+    ]);
+
+    res.render("index", {
+        title: "Local Cologne Store Home",
+        nColognes: nColognes,
+        nCologneInstances: nCologneInstances,
+        nBrands: nBrands,
+        nScentNotes: nScentNotes
+    });
 });
 
 // Diplay list of all Colognes

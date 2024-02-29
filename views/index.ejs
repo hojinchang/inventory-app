@@ -1,11 +1,24 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
+<%- include("partials/head") %>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <header>
+      <h1><%= title %></h1>
+      <p>Welcome to <em><%= title %></em>, a basic Express website developed to learn Express and Node</p>
+    </header>
+
+    <div class="body-content-container">
+      <%- include("partials/sidebar") %>
+      <div class="stock-container">
+        <p>The Cologne Store has the following record counts:</p>
+        <ul>
+          <li><strong>Colognes:</strong> <%= nColognes %></li>
+          <li><strong>Cologne Stock:</strong> <%= nCologneInstances %></li>
+          <li><strong>Brands:</strong> <%= nBrands %></li>
+          <li><strong>Scent Notes:</strong> <%= nScentNotes %></li>
+        </ul>
+      </div>
+    </div>
+
+
+    <%- include("partials/footer") %>
   </body>
 </html>
