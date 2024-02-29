@@ -1,0 +1,33 @@
+<%- include("partials/head") %>
+    <body>
+        <div class="content-wrapper">
+            <header>
+                <h1><%= title %></h1>
+            </header>
+
+            <main>
+                <%- include("partials/sidebar") %>
+                <div class="content-container">
+                    <% if (brandList.length) { %>
+                        <ul class="list">
+                            <% brandList.forEach(brand => { %>
+                                <li>
+                                    <a href="<%= brand.url %>"><%= brand.name %></a>
+                                    (<%= brand.countryOfOrigin %>
+                                    <% if (brand.yearEstablishedFormatted) { %>
+                                        | <%= brand.yearEstablishedFormatted %>)
+                                    <% } else { %>
+                                        )
+                                    <% }%>
+                                </li>
+                            <% }); %>
+                        </ul>
+                    <% } else  { %>
+                        <p>There are no brands.</p>
+                    <% } %>
+                </div>
+            </main>
+        </div>
+
+        <%- include("partials/footer") %>
+    </body>

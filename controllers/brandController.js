@@ -4,7 +4,14 @@ const asyncHandler = require("express-async-handler");
 
 // Display list of all Brands
 exports.brand_list = asyncHandler(async(req, res, next) => {
-    res.send("NOT IMPLEMENTED: Brand list");
+    const allBrands = await Brand.find()
+                            .sort({ name: 1 })
+                            .exec();
+    
+    res.render("brandList", {
+        title: "All Brands in Stock",
+        brandList: allBrands
+    });
 });
 
 // Display detail page for specific Brand

@@ -14,9 +14,9 @@ BrandSchema.virtual("url").get(function() {
     return `/catalog/brand/${this._id}`;
 });
 
-BrandSchema.virtual("year_established_formatted").get(function() {
+BrandSchema.virtual("yearEstablishedFormatted").get(function() {
     return this.yearEstablished
-        ? DateTime.fromJSDate(this.yearEstablished).toLocaleString(DateTime.DATE_MED)
+        ? DateTime.fromJSDate(this.yearEstablished).toFormat("yyyy")
         : "";
 });
 
