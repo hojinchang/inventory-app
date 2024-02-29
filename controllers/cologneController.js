@@ -29,7 +29,10 @@ exports.cologne_list = asyncHandler(async(req, res, next) => {
                             .populate("brand")
                             .exec();
     
-    res.render("cologneList", { title: "List of Colognes in Stock", cologneList: allColognes});
+    res.render("cologneList", { 
+        title: "List of Colognes in Stock", 
+        cologneList: allColognes
+    });
 });
 
 // Display detail page for specific Cologne

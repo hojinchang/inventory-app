@@ -1,0 +1,40 @@
+<%- include("partials/head") %>
+    <body>
+        <div class="content-wrapper">
+            <header>
+                <h1><%= title %></h1>
+            </header>
+    
+            <main>
+                <%- include("partials/sidebar") %>
+                <div class="content-container">
+                    <% if (cologneInstanceList.length) { %>
+                        <ul class="list">
+                            <% cologneInstanceList.forEach(cologneInstance => { %>
+                             <li>
+                                <a href="<%= cologneInstance.url %>">
+                                    <div>
+                                        <%= cologneInstance.cologne.brand.name %>
+                                    </div>
+                                    <div>
+                                        <%= cologneInstance.cologne.name %>
+                                        (<%= cologneInstance.batchNumber %>)
+                                    </div>
+                                    <div>
+                                        $<%= cologneInstance.price %> |
+                                        <%= cologneInstance.size %>
+                                    </div>
+                                </a>
+                             </li>  
+                             <% }); %> 
+                        </ul>
+                    <% } else { %>
+                        <p>There are no cologne instances in the store.</p>
+                    <% } %>
+                </div>
+            </main>
+        </div>
+
+        <%- include("partials/footer") %>
+    </body>
+</html>

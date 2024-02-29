@@ -4,7 +4,15 @@ const asyncHandler = require("express-async-handler");
 
 // Diplay list of all CologneInstances
 exports.cologneinstance_list = asyncHandler(async(req, res, next) => {
-    res.send("NOT IMPLEMENTED: CologneInstance list");
+    const allCologneInstances = await CologneInstance.find()
+                                    .sort({ cologne: 1 })
+                                    .populate({ path: "cologne", populate: { path: "brand" } })
+                                    .exec();
+
+    res.render("cologneInstanceList", {
+        title: "List of Cologne Instances in Stock",
+        cologneInstanceList: allCologneInstances
+    });
 });
 
 // Display detail page for specific CologneInstance
