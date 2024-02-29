@@ -37,7 +37,7 @@ const ScentNotesSchema = new Schema({
 
 // Set the scent note page url
 ScentNotesSchema.virtual("url").get(function() {
-    return `/catalog/scent/${this._id}`;
+    return `/catalog/scentnote/${this._id}`;
 });
 
 module.exports = mongoose.model("Scent", ScentNotesSchema);

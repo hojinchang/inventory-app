@@ -1,0 +1,38 @@
+<%- include("partials/head") %>
+    <body>
+        <div class="content-wrapper">
+            <header>
+                <h1><%= title %></h1>
+            </header>
+
+            <main>
+                <%- include("partials/sidebar") %>
+                <div class="content-container">
+                    <h2>Scent Note: <%= scentNote.name %></h2>
+                    <% if (colognesWithScentNote.length) { %>
+                        <dl>
+                            <% colognesWithScentNote.forEach(cologne => { %>
+                                <dt>
+                                    <a href="<%= cologne.url %>">
+                                        <div>
+                                            <%= cologne.brand.name %>
+                                        </div>
+                                        <div>
+                                            <%= cologne.name %>
+                                        </div>
+                                    </a>
+                                </dt>
+                                <dd>
+                                    <%= cologne.description %>
+                                </dd>
+                            <% }); %>
+                        </dl>
+                    <% } else  { %>
+                        <p>There are no colognes in stock with that scent note.</p>
+                    <% } %>
+                </div>
+            </main>
+        </div>
+
+        <%- include("partials/footer") %>
+    </body>

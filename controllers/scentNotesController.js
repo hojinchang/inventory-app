@@ -1,4 +1,5 @@
 const ScentNote = require("../models/scentNotes");
+const Cologne = require("../models/cologne");
 
 const asyncHandler = require("express-async-handler");
 
@@ -16,7 +17,23 @@ exports.scentnote_list = asyncHandler(async(req, res, next) => {
 
 // Display detail page for specific ScentNote
 exports.scentnote_detail = asyncHandler(async(req, res, next) => {
-    res.send(`NOT IMPLEMENTED: ScentNote detail: ${req.params.id}`);
+    const [scentNote, colognesWithScentNote] = await Promise.all([
+        ScentNote.findById(req.params.id).exec(),
+        Cologne.find({ scentNotes: req.params.id }, "name brand description").populate("brand").exec()
+    ]);
+
+    if (scentNote === null) {
+        // No results
+        const err = new Error("Scent Note Not Found");
+        err.status = 404;
+        return next(err);
+    }
+
+    res.render("scentNoteDetail", {
+        title: "Scent Note Detail",
+        scentNote: scentNote,
+        colognesWithScentNote: colognesWithScentNote
+    });
 });
 
 // Display ScentNote create form on GET
