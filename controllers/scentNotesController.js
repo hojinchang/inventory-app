@@ -1,10 +1,17 @@
-const ScentNote = require("../models/cologne");
+const ScentNote = require("../models/scentNotes");
 
 const asyncHandler = require("express-async-handler");
 
 // Diplay list of all ScentNotes
 exports.scentnote_list = asyncHandler(async(req, res, next) => {
-    res.send("NOT IMPLEMENTED: ScentNote list");
+    const allScentNotes = await ScentNote.find()
+                            .sort({ name: 1 })
+                            .exec();
+    
+    res.render("scentNoteList", {
+        title: "All Scent Notes",
+        scentNoteList: allScentNotes
+    });
 });
 
 // Display detail page for specific ScentNote

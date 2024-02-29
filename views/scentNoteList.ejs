@@ -1,0 +1,27 @@
+<%- include("partials/head") %>
+    <body>
+        <div class="content-wrapper">
+            <header>
+                <h1><%= title %></h1>
+            </header>
+
+            <main>
+                <%- include("partials/sidebar") %>
+                <div class="content-container">
+                    <% if (scentNoteList.length) { %>
+                        <ul class="list">
+                            <% scentNoteList.forEach(scentNote => { %>
+                                <li>
+                                    <a href="<%= scentNote.url %>"><%= scentNote.name %></a>
+                                </li>
+                            <% }); %>
+                        </ul>
+                    <% } else  { %>
+                        <p>There are no scent notes.</p>
+                    <% } %>
+                </div>
+            </main>
+        </div>
+
+        <%- include("partials/footer") %>
+    </body>
