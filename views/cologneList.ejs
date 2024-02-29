@@ -1,0 +1,30 @@
+<%- include("partials/head") %>
+    <body>
+        <div class="content-wrapper">
+            <header>
+                <h1><%= title %></h1>
+                <p></p>
+            </header>
+    
+            <main>
+                <%- include("partials/sidebar") %>
+                <div class="content-container">
+                    <% if (cologneList.length) { %>
+                        <ul class="list">
+                            <% cologneList.forEach(cologne => { %>
+                                <li>
+                                    <a href="<%= cologne.url %>"><%= cologne.name %></a>
+                                    (<%= cologne.brand.name %>)
+                                </li>
+                            <% }); %>
+                        </ul>
+                    <% } else  { %>
+                        <p>There are no colognes</p>
+                    <% } %>
+                </div>
+            </main>
+        </div>
+
+        <%- include("partials/footer") %>
+    </body>
+</html>

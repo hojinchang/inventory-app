@@ -24,7 +24,12 @@ exports.index = asyncHandler(async(req, res, next) => {
 
 // Diplay list of all Colognes
 exports.cologne_list = asyncHandler(async(req, res, next) => {
-    res.send("NOT IMPLEMENTED: Cologne list");
+    const allColognes = await Cologne.find({}, "name brand")
+                            .sort({ brand: 1 })
+                            .populate("brand")
+                            .exec();
+    
+    res.render("cologneList", { title: "List of Colognes in Stock", cologneList: allColognes});
 });
 
 // Display detail page for specific Cologne
