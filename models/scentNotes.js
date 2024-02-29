@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const ScentNotesSchema = new Schema({
     name: {
         type: String,
-        required: true,
         minLength: 3,
         maxLength: 100,
         enum: [

@@ -1,4 +1,5 @@
 const Brand = require("../models/brand");
+const Cologne = require("../models/cologne");
 
 const asyncHandler = require("express-async-handler");
 
@@ -16,7 +17,23 @@ exports.brand_list = asyncHandler(async(req, res, next) => {
 
 // Display detail page for specific Brand
 exports.brand_detail = asyncHandler(async(req, res, next) => {
-    res.send(`NOT IMPLEMENTED: Brand detail: ${req.params.id}`);
+    const [brand, colognesByBrand] = await Promise.all([
+        Brand.findById(req.params.id).exec(),
+        Cologne.find({ brand: req.params.id }, "name description scentNotes").populate("scentNotes").exec()
+    ]);
+
+    if (Brand === null) {
+        // No results
+        const err = new Error("Brand Not Found");
+        err.status = 404;
+        return next(err);
+    }
+
+    res.render("brandDetail", {
+        title: "Brand Detail",
+        brand: brand,
+        colognesByBrand: colognesByBrand
+    })
 });
 
 // Display Brand create form on GET

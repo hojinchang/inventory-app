@@ -50,3 +50,7 @@ main {
 .sidebar-nav-list {
   list-style: none;
 }
+
+.scent-note-dd {
+  margin-bottom: 1rem;
+}
