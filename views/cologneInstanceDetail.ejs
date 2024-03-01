@@ -1,0 +1,21 @@
+<%- include("partials/head") %>
+    <body>
+        <div class="content-wrapper">
+            <header>
+                <h1><%= title %></h1>
+            </header>
+
+            <main>
+                <%- include("partials/sidebar") %>
+                <div class="content-container">
+                    <h2>ID: <%= cologneInstance.id %></h2>
+                    <p><b>Name:</b> <a href="<%= cologneInstance.cologne.url %>"><%= cologneInstance.cologne.name %></a></p>
+                    <p><b>Batch Number:</b> <%= cologneInstance.batchNumber %></p>
+                    <p><b>Price:</b> $<%= cologneInstance.price %></p>
+                    <p><b>Size:</b> <%= cologneInstance.size %></p>
+                    <hr>
+            </main>
+        </div>
+
+        <%- include("partials/footer") %>
+    </body>

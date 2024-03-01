@@ -17,7 +17,19 @@ exports.cologneinstance_list = asyncHandler(async(req, res, next) => {
 
 // Display detail page for specific CologneInstance
 exports.cologneinstance_detail = asyncHandler(async(req, res, next) => {
-    res.send(`NOT IMPLEMENTED: CologneInstance detail: ${req.params.id}`);
+    const cologneInstance = await CologneInstance.findById(req.params.id).populate("cologne").exec();
+
+    if (cologneInstance === null) {
+        // No results
+        const err = new Error("Cologne Instance Not Found");
+        err.status = 404;
+        return next(err);
+    }
+
+    res.render("cologneInstanceDetail", {
+        title: "Cologne Instance Detail",
+        cologneInstance: cologneInstance
+    })
 });
 
 // Display CologneInstance create form on GET

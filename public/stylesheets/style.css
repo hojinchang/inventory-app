@@ -54,3 +54,7 @@ main {
 .scent-note-dd {
   margin-bottom: 1rem;
 }
+
+.content-container {
+  width: 100%;
+}
