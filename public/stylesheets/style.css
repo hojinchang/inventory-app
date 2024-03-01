@@ -41,6 +41,10 @@ main {
   padding: 0 2rem 2rem;
 }
 
+aside {
+  width: 410px;
+}
+
 .list {
   display: flex;
   flex-direction: column;
@@ -57,4 +61,54 @@ main {
 
 .content-container {
   width: 100%;
+}
+
+.form-input-container {
+  margin-bottom: 1rem;
+}
+
+form input[type="text"] {
+    width: 100%;
+    padding: 0.75rem; 
+    border-radius: 6px;
+    font-size: 1.1rem;
+}
+
+.form-input-container {
+  margin-bottom: 1rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+button[type="submit"] {
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  background-color: #66D0FA;
+  border-radius: 6px;
+  border: none;
+
+  transition: background-color 0.3s ease-in-out
+}
+
+button[type="submit"]:hover {
+  background-color: #0db8fc;
+}
+
+input:focus {
+  outline: none;
+  border: 2px solid #0db8fc;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.error {
+  color: red;
 }

@@ -7,30 +7,6 @@ const ScentNotesSchema = new Schema({
         type: String,
         minLength: 3,
         maxLength: 100,
-        enum: [
-            'Citrus',
-            'Woody',
-            'Floral',
-            'Spicy',
-            'Aquatic',
-            'Fresh',
-            'Oriental',
-            'Fruity',
-            'Herbal',
-            'Green',
-            'Musk',
-            'Amber',
-            'Vanilla',
-            'Leather',
-            'Chypre',
-            'Gourmand',
-            'Iris',
-            'Tobacco',
-            'Cocoa',
-            'Cardamom',
-            'Bergamot',
-            'Tonka Bean'
-        ]
     }
 });
 
