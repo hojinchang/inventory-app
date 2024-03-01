@@ -22,7 +22,7 @@ exports.brand_detail = asyncHandler(async(req, res, next) => {
         Cologne.find({ brand: req.params.id }, "name description scentNotes").populate("scentNotes").exec()
     ]);
 
-    if (Brand === null) {
+    if (brand === null) {
         // No results
         const err = new Error("Brand Not Found");
         err.status = 404;

@@ -37,7 +37,24 @@ exports.cologne_list = asyncHandler(async(req, res, next) => {
 
 // Display detail page for specific Cologne
 exports.cologne_detail = asyncHandler(async(req, res, next) => {
-    res.send(`NOT IMPLEMENTED: Cologne detail: ${req.params.id}`);
+    const [cologne, cologneInstances] = await Promise.all([
+        Cologne.findById(req.params.id).populate(["brand", "scentNotes"]).exec(),
+        CologneInstance.find({ cologne: req.params.id }).exec()
+    ]);
+
+    if (cologne === null) {
+        // No results
+        const err = new Error("Cologne Not Found");
+        err.status = 404;
+        return next(err);
+    }
+
+    res.render("cologneDetail", {
+        title: "Cologne Detail",
+        cologne: cologne,
+        cologneInstances: cologneInstances
+    });
+
 });
 
 // Display Cologne create form on GET

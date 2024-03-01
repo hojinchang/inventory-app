@@ -1,0 +1,43 @@
+<%- include("partials/head") %>
+    <body>
+        <div class="content-wrapper">
+            <header>
+                <h1><%= title %></h1>
+            </header>
+
+            <main>
+                <%- include("partials/sidebar") %>
+                <div class="content-container">
+                    <h2>Cologne: <%= cologne.name %></h2>
+                    <p><b>Brand:</b> <%= cologne.brand.name %></p>
+                    <p><b>Description:</b> <%= cologne.description %></p>
+                    <p><b>Scent Notes:</b>
+                    <% if (cologne.scentNotes.length) { %>
+                        <% cologne.scentNotes.forEach((scentNote, idx) => { %>
+                            <a href="<%= scentNote.url %>"><%= scentNote.name %></a>
+                            <% if (idx != (cologne.scentNotes.length - 1)) { %>
+                                |
+                            <% } %>
+                        <% }); %>
+                    <% } %>
+                    </p>
+
+                    <div class="sub-content-container">
+                        <h3>Items in Stock</h3>
+                        <hr>
+                        <% if (cologneInstances.length) { %>
+                            <% cologneInstances.forEach(cologneInstance => { %>
+                                <p><b>ID:</b> <a href="<%= cologneInstance.url %>"><%= cologneInstance.id %></a></p>
+                                <p><b>Batch Number:</b> <%= cologneInstance.batchNumber %></p>
+                                <p><b>Price:</b> $<%= cologneInstance.price %></p>
+                                <p><b>Size:</b> <%= cologneInstance.size %></p>
+                                <hr>
+                            <% }); %>
+                        <% } %>
+                    </div>                    
+                </div>
+            </main>
+        </div>
+
+        <%- include("partials/footer") %>
+    </body>
