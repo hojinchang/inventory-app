@@ -2,6 +2,7 @@ const Brand = require("../models/brand");
 const Cologne = require("../models/cologne");
 
 const asyncHandler = require("express-async-handler");
+const { body, validationResult } = require("express-validator");
 
 // Display list of all Brands
 exports.brand_list = asyncHandler(async(req, res, next) => {
@@ -38,13 +39,62 @@ exports.brand_detail = asyncHandler(async(req, res, next) => {
 
 // Display Brand create form on GET
 exports.brand_create_get = asyncHandler(async(req, res, next) => {
-    res.send("NOT IMPLEMENTED: Brand create GET");
+    res.render("brandForm", {
+        title: "Create Brand",
+        brand: null,
+        errors: []
+    })
 });
 
 // Handle Brand create on POST
-exports.brand_create_post = asyncHandler(async(req, res, next) => {
-    res.send("NOT IMPLEMENTED: Brand create POST");
-});
+exports.brand_create_post = [
+    body("name")
+        .trim()
+        .isLength({ min: 1 })
+        .escape()
+        .withMessage("Name must be specified")
+        .isAlphanumeric()
+        .withMessage("Name has non-alphanumeric characters"),
+    body("country")
+        .trim()
+        .isLength({ min: 1 })
+        .escape()
+        .withMessage("Country must be specified")
+        .isAlpha()
+        .withMessage("Country must contain only letters (no numbers or special characters)"),
+    body("yearEstablished")
+        .trim()
+        .isInt({ mine:1700, max: new Date().getFullYear() })
+        .withMessage("Year must be a valid number between 1700 and the current year"),
+    
+    asyncHandler(async(req, res, next) => {
+        const errors = validationResult(req);
+        const brand = new Brand({ 
+            name: req.body.name,
+            countryOfOrigin: req.body.country,
+            yearEstablished: req.body.yearEstablished
+        });
+
+        if (!errors.isEmpty()) {
+            res.render("brandForm", {
+                title: "Create Brand",
+                brand: brand,
+                errors: errors.array()
+            });
+            return;
+        } else {
+            const brandExists = await Brand.findOne({ name: req.body.name })
+                                        .collation({ locale: "en", strength: 2 })
+                                        .exec();
+            if (brandExists) {
+                res.redirect(brandExists.url);
+            } else {
+                await brand.save();
+                res.redirect(brand.url);
+            }
+        }
+    })
+]
 
 // Display Brand delete form on GET
 exports.brand_delete_get = asyncHandler(async(req, res, next) => {

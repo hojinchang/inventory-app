@@ -67,7 +67,8 @@ aside {
   margin-bottom: 1rem;
 }
 
-form input[type="text"] {
+form input[type="text"],
+form input[type="number"] {
     width: 100%;
     padding: 0.75rem; 
     border-radius: 6px;
