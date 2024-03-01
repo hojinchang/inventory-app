@@ -18,8 +18,13 @@
                                 
                                 <% if (cologne.scentNotes.length) { %>
                                     <dd class="scent-note-dd">
-                                        <% cologne.scentNotes.forEach(scentNote => { %>
+                                        <% cologne.scentNotes.forEach((scentNote, idx) => { %>
                                             <a href="<%= scentNote.url %>"><%= scentNote.name %></a>
+
+                                            <% if (idx != (cologne.scentNotes.length - 1)) { %>
+                                                |
+                                            <% } %>
+
                                         <% }); %>
                                     </dd>
                                 <% } %>
