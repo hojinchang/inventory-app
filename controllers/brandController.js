@@ -52,16 +52,12 @@ exports.brand_create_post = [
         .trim()
         .isLength({ min: 1 })
         .escape()
-        .withMessage("Name must be specified")
-        .isAlphanumeric()
-        .withMessage("Name has non-alphanumeric characters"),
+        .withMessage("Name must be specified"),
     body("country")
         .trim()
         .isLength({ min: 1 })
         .escape()
-        .withMessage("Country must be specified")
-        .isAlpha()
-        .withMessage("Country must contain only letters (no numbers or special characters)"),
+        .withMessage("Country must be specified"),
     body("yearEstablished")
         .trim()
         .isInt({ mine:1700, max: new Date().getFullYear() })

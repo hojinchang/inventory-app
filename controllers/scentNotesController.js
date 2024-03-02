@@ -79,7 +79,6 @@ exports.scentnote_create_post = [
                                             .exec();
             
             if (scentNoteExists) {
-                console.log("it exists");
                 res.redirect(scentNoteExists.url);
             } else {
                 await scentNote.save();

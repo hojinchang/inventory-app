@@ -7,6 +7,14 @@
             <main>
                 <%- include("partials/sidebar") %>
                 <div class="content-container">
+                    <% if (errors.length) { %>
+                        <ul>
+                            <% errors.forEach(error => { %>
+                                <li class="error"><%- error.msg %></li>
+                            <% }); %>
+                        </ul>
+                    <% } %>
+                    
                     <form method="POST">
                         <div class="form-input-container">
                             <label for="scentNote">Scent Note:</label>
@@ -23,14 +31,6 @@
                             <button type="submit">Submit</button>
                         </div>
                     </form>
-
-                    <% if (errors.length) { %>
-                        <ul>
-                            <% errors.forEach(error => { %>
-                                <li class="error"><%- error.msg %></li>
-                            <% }); %>
-                        </ul>
-                    <% } %>
                 </div>
             </main>
         </div>

@@ -1,0 +1,76 @@
+<%- include("partials/head") %>
+    <body>
+        <div class="content-wrapper">
+            <header>
+                <h1><%= title %></h1>
+            </header>
+            <main>
+                <%- include("partials/sidebar") %>
+                <div class="content-container">
+                    <% if (errors.length) { %>
+                        <ul>
+                            <% errors.forEach(error => { %>
+                                <li class="error"><%- error.msg %></li>
+                            <% }); %>
+                        </ul>
+                    <% } %>
+
+                    <form method="POST">
+                        <div class="form-input-container">
+                            <label for="name">Name:</label>
+                            <input 
+                                type="text" 
+                                id="name"
+                                name="name"
+                                placeholder="Bleu de Chanel, Eros, etc."
+                                value="<%= cologne ? cologne.name : '' %>"
+                                required
+                            >
+                        </div>
+                        <div class="form-input-container">
+                            <label for="brand">Brand:</label>
+                            <select id="brand" name="brand" required>
+                                <% if (brands.length) { %>
+                                    <% brands.forEach(brand => { %>
+                                        <% if (cologne) { %>
+                                            <% if (brand.select) { %>
+                                                <option value="<%= brand.id %>" selected><%= brand.name %></option>
+                                            <% } else { %>
+                                                <option value="<%= brand.id %>"><%= brand.name %></option>
+                                            <% } %>
+                                        <% } else { %>
+                                            <option value="<%= brand.id %>"><%= brand.name %></option>
+                                        <% } %>
+                                    <% }); %>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="form-input-container">
+                            <label for="description">Description:</label>
+                            <textarea id="description" name="description" rows="3" cols="100"></textarea>
+                        </div>
+                        <fieldset>
+                            <legend>Scent Notes</legend>
+                            <% if (scentNotes.length) { %>
+                                <% scentNotes.forEach(scentNote => { %>
+                                    <div class="form-input-container">
+                                        <label class="checkbox" for="<%= scentNote.name %>"><%= scentNote.name %></label>
+                                        <% if (scentNote.checked) { %>
+                                            <input type="checkbox" id="<%= scentNote.name %>" name="scentNotes" value="<%= scentNote.id %>" checked>
+                                        <% } else { %>
+                                            <input type="checkbox" id="<%= scentNote.name %>" name="scentNotes" value="<%= scentNote.id %>">
+                                        <% } %>
+                                    </div>
+                                    <% }); %>
+                                <% } %>
+                        </fieldset>
+                        <div class="form-button-container">
+                            <button type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+
+        <%- include("partials/footer") %>
+    </body>
