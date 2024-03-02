@@ -1,0 +1,80 @@
+<%- include("partials/head") %>
+    <body>
+        <div class="content-wrapper">
+            <header>
+                <h1><%= title %></h1>
+            </header>
+            <main>
+                <%- include("partials/sidebar") %>
+                <div class="content-container">
+                    <% if (errors.length) { %>
+                        <ul>
+                            <% errors.forEach(error => { %>
+                                <li class="error"><%- error.msg %></li>
+                            <% }); %>
+                        </ul>
+                    <% } %>
+
+                    <form method="POST">
+                        <div class="form-input-container">
+                            <label for="cologne">Cologne:</label>
+                            <select id="cologne" name="cologne" required>
+                                <% if (colognes.length) { %>
+                                    <% colognes.forEach(cologne => { %>
+                                        <% if (cologneInstance) { %>
+                                            <% if (cologne.select) { %>
+                                                <option value="<%= cologne.id %>" selected><%= cologne.name %></option>
+                                            <% } else { %>
+                                                <option value="<%= cologne.id %>"><%= cologne.name %></option>
+                                            <% } %>
+                                        <% } else { %>
+                                            <option value="<%= cologne.id %>"><%= cologne.name %></option>
+                                        <% } %>
+                                    <% }); %>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="form-input-container">
+                            <label for="batchNumber">Batch Number:</label>
+                            <input 
+                                type="text" 
+                                id="batchNumber" 
+                                name="batchNumber"
+                                value="<%= cologneInstance ? cologneInstance.batchNumber : '' %>"
+                                required
+                            >
+                        </div>
+                        <div class="form-input-container">
+                            <label for="price">Price ($):</label>
+                            <input 
+                                type="number"
+                                id="price"
+                                name="price"
+                                min="0"
+                                max="10000"
+                                placeholder="120"
+                                value="<%= cologneInstance ? cologneInstance.price : '' %>"
+                                required
+                            >
+                        </div>
+                        <div class="form-input-container">
+                            <label for="size">Size:</label>
+                            <input 
+                                type="text"
+                                id="size"
+                                name="size"
+                                placeholder="100ml"
+                                value="<%= cologneInstance ? cologneInstance.size : '' %>"
+                                required
+                            >
+                        </div>
+                        <div class="form-button-container">
+                            <button type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+
+        <%- include("partials/footer") %>
+    </body>

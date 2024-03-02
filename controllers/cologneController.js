@@ -121,7 +121,7 @@ exports.cologne_create_post = [
 
             // Pre-select the brand select input
             for (const brand of allBrands) {
-                if (cologne.brand == brand.id) {
+                if (brand.id == cologne.brand) {
                     brand.select = "true";
                 }
             }
@@ -152,8 +152,7 @@ exports.cologne_create_post = [
             }
         }
     })
-]
-
+];
 
 // Display Cologne delete form on GET
 exports.cologne_delete_get = asyncHandler(async(req, res, next) => {

@@ -47,7 +47,14 @@
                         </div>
                         <div class="form-input-container">
                             <label for="description">Description:</label>
-                            <textarea id="description" name="description" rows="3" cols="100"></textarea>
+                            <textarea 
+                                id="description" 
+                                name="description" 
+                                rows="3" 
+                                cols="100"
+                                value="<%= cologne ? cologne.description : '' %>"
+                                required
+                            ></textarea>
                         </div>
                         <fieldset>
                             <legend>Scent Notes</legend>
