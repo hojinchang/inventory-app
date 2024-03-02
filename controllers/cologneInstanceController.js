@@ -109,12 +109,22 @@ exports.cologneinstance_create_post = [
 
 // Display CologneInstance delete form on GET
 exports.cologneinstance_delete_get = asyncHandler(async(req, res, next) => {
-    res.send("NOT IMPLEMENTED: CologneInstance delete GET");
+    const cologneInstance = await CologneInstance.findById(req.params.id).populate("cologne").exec();
+
+    if (cologneInstance === null) {
+        res.redirect("/catalog/cologneinstances");
+    }
+
+    res.render("cologneInstanceDelete", {
+        title: "Delete CologneInstance",
+        cologneInstance: cologneInstance
+    });
 });
 
 // Handle CologneInstance delete on POST
 exports.cologneinstance_delete_post = asyncHandler(async(req, res, next) => {
-    res.send("NOT IMPLEMENTED: CologneInstance delete POST");
+    await CologneInstance.findByIdAndDelete(req.body.cologneInstance);
+    res.redirect("/catalog/cologneinstances");
 });
 
 // Display CologneInstance update form on GET

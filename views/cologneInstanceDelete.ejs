@@ -15,7 +15,15 @@
                     <p><b>Size:</b> <%= cologneInstance.size %></p>
                     <hr>
 
-                    <a href="<%= cologneInstance.url + '/delete' %>">Delete Cologne Instance</a>
+                    <h3><strong>Do you really want to delete this Cologne Instance?</strong></h3>
+                    <form method="POST">
+                        <div class="form-input-container">
+                            <input type="hidden" name="cologneInstance" value="<%= cologneInstance.id %>">
+                        </div>
+                        <div class="form-button-container">
+                            <button type="submit">Delete</button>
+                        </div>
+                    </form>
             </main>
         </div>
 
