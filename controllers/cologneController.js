@@ -156,12 +156,40 @@ exports.cologne_create_post = [
 
 // Display Cologne delete form on GET
 exports.cologne_delete_get = asyncHandler(async(req, res, next) => {
-    res.send("NOT IMPLEMENTED: Cologne delete GET");
+    const [cologne, allCologneInstances] = await Promise.all([
+        Cologne.findById(req.params.id).populate(["brand", "scentNotes"]).exec(),
+        CologneInstance.find({ cologne: req.params.id }).exec()
+    ]);
+
+    if (cologne === null) {
+        res.redirect("/catalog/colognes");
+    }
+
+    res.render("cologneDelete", {
+        title: "Delete Cologne",
+        cologne: cologne,
+        cologneInstances: allCologneInstances
+    });
 });
 
 // Handle Cologne delete on POST
 exports.cologne_delete_post = asyncHandler(async(req, res, next) => {
-    res.send("NOT IMPLEMENTED: Cologne delete POST");
+    const [cologne, allCologneInstances] = await Promise.all([
+        Cologne.findById(req.params.id).populate(["brand", "scentNotes"]).exec(),
+        CologneInstance.find({ cologne: req.params.id }).exec()
+    ]);
+
+    if (allCologneInstances.length > 0) {
+        res.render("cologneDelete", {
+            title: "Delete Cologne",
+            cologne: cologne,
+            cologneInstances: allCologneInstances
+        });
+        return;
+    } else {
+        await Cologne.findByIdAndDelete(req.body.cologne);
+        res.redirect("/catalog/colognes");
+    }
 });
 
 // Display Cologne update form on GET

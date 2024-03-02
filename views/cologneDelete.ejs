@@ -4,7 +4,6 @@
             <header>
                 <h1><%= title %></h1>
             </header>
-
             <main>
                 <%- include("partials/sidebar") %>
                 <div class="content-container">
@@ -20,12 +19,10 @@
                             <% } %>
                         <% }); %>
                     <% } %>
-                    </p>
-
                     <div class="sub-content-container">
-                        <h3>Items in Stock</h3>
-                        <hr>
                         <% if (cologneInstances.length) { %>
+                            <h3><strong>Delete the following cologne instances before attempting to delete this Cologne.</strong></h3>
+                            <hr>
                             <% cologneInstances.forEach(cologneInstance => { %>
                                 <p><b>ID:</b> <a href="<%= cologneInstance.url %>"><%= cologneInstance.id %></a></p>
                                 <p><b>Batch Number:</b> <%= cologneInstance.batchNumber %></p>
@@ -33,10 +30,19 @@
                                 <p><b>Size:</b> <%= cologneInstance.size %></p>
                                 <hr>
                             <% }); %>
+                            
+                        <% } else  { %>
+                            <h3><strong>Do you really want to delete this Cologne?</strong></h3>
+                            <form method="POST">
+                                <div class="form-input-container">
+                                    <input type="hidden" name="cologne" value="<%= cologne.id %>">
+                                </div>
+                                <div class="form-button-container">
+                                    <button type="submit">Delete</button>
+                                </div>
+                            </form>
                         <% } %>
                     </div>
-                    
-                    <a href="<%= cologne.url + '/delete' %>">Delete Cologne</a>
                 </div>
             </main>
         </div>
