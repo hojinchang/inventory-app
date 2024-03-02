@@ -94,12 +94,48 @@ exports.brand_create_post = [
 
 // Display Brand delete form on GET
 exports.brand_delete_get = asyncHandler(async(req, res, next) => {
-    res.send("NOT IMPLEMENTED: Brand delete GET");
+    const [brand, allColognesByBrand] = await Promise.all([
+        Brand.findById(req.params.id).exec(),
+        Cologne.find({ brand: req.params.id }, "name description scentNotes")
+            .populate("scentNotes")
+            .exec()
+    ]);
+
+    if (brand === null) {
+        // Brand doesnt exist
+        res.redirect("/catalog/brands");
+    }
+
+    res.render("brandDelete", {
+        title: "Delete Brand",
+        brand: brand,
+        colognesByBrand: allColognesByBrand
+    });
+
 });
 
 // Handle Brand delete on POST
 exports.brand_delete_post = asyncHandler(async(req, res, next) => {
-    res.send("NOT IMPLEMENTED: Brand delete POST");
+    const [brand, allColognesByBrand] = await Promise.all([
+        Brand.findById(req.params.id).exec(),
+        Cologne.find({ brand: req.params.id }, "name description scentNotes")
+            .populate("scentNotes")
+            .exec()
+    ]);
+
+    if (allColognesByBrand.length > 0) {
+        // The brand has colognes, render the same as the GET request
+        res.render("brandDelete", {
+            title: "Delete Brand",
+            brand: brand,
+            colognesByBrand: allColognesByBrand
+        });
+        return;
+    } else {
+        // Brand has no colognes, delete the brand
+        await Brand.findByIdAndDelete(req.body.brand);
+        res.redirect("/catalog/brands");
+    }
 });
 
 // Display Brand update form on GET
